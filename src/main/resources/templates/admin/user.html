@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Patient Disability Management System</title>
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="static/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+	<script  type="text/javascript" src="static/js/jquery-3.5.1.js"></script>
+	<script  type="text/javascript" src="static/js/jquery.dataTables.min.js"></script>
+	<script  type="text/javascript" src="static/js/dataTables.bootstrap5.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#patients').DataTable();
+		});
+		function deleteUser(id) {
+			var res = confirm("Do you want to delete this user?");
+			if (res) {
+				$.ajax({
+					method: "DELETE",
+					url: "/user/" + id,
+				})
+					.done(function (msg) {
+						if (msg === "success") {
+							alert("User is deleted successfully");
+							window.location = "adminusers";
+						}
+						else {
+							alert("Fail to delete user");
+						}
+					});
+			}
+		}
+
+	</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" th:href="@{/adminhome}">Patient Disability Management System</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/adminpatients}">Patient</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/adminusers}">User</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/admindisabilities}">Disability</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+					</li>
+					<li class="nav-item">
+						<span class="nav-link active" aria-current="page">Welcome,<span
+								th:text="${user.firstName} + ' ' + ${user.lastName}" /></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br /><br /><br />
+	<div class="container-fluid">
+		<div class="row col-md-8 offset-md-2">
+			<table id="patients" class="table table-striped" style="width:100%">
+				<thead>
+					<tr>
+						<th>User Id</th>
+						<th>User First Name</th>
+						<th>User Last Name</th>
+						<th>User Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user1 : ${users}">
+						<td th:text="${user1.id}"></td>
+						<td th:text="${user1.firstName}"></td>
+						<td th:text="${user1.lastName}"></td>
+						<td th:text="${user1.email}"></td>
+						<td><span><a class="btn btn-primary" href="#"
+									th:onclick="'javascript:deleteUser('+${user1.id}+');'">Delete</a></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Patient Disability Management System</title>
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" th:href="@{/adminhome}">Patient Disability Management System</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/adminpatients}">Patient</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/admindisabilities}">Disability</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+					</li>
+					<li class="nav-item">
+						<span class="nav-link active" aria-current="page">Welcome,<span
+								th:text="${user.firstName} + ' ' + ${user.lastName}" /></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br /><br /><br />
+	<div class="container">
+		<div class="row col-md-8 offset-md-2">
+			<div class="col-4">
+				<div class="card">
+					<div class="card-header">
+						<h2 class="text-center">Disability</h2>
+					</div>
+					<div th:if="${param.success}">
+						<div class="alert alert-info">
+							You have saved disability succesfully!
+						</div>
+					</div>
+					<div class="card-body">
+						<form method="post" role="form" th:action="@{/disability/update}" th:object="${disabilityObj}">
+							<div class="form-group mb-3">
+								<label class="form-label">Disability Id</label>
+								<input class="form-control" id="id" name="id"
+									placeholder="Enter Disability Id" th:field="*{id}" type="text" readonly />
+								<p th:errors="*{id}" class="text-danger"
+									th:if="${#fields.hasErrors('id')}">
+								</p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Disability Name</label>
+								<input class="form-control" id="disability" name="disability"
+									placeholder="Enter Disability name" th:field="*{disability}" type="text" required />
+								<p th:errors="*{disability}" class="text-danger"
+									th:if="${#fields.hasErrors('disability')}">
+								</p>
+							</div>
+
+							<div class="form-group">
+								<button class="btn btn-primary" type="submit">Save</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
