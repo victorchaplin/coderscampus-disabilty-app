@@ -130,7 +130,7 @@ public class UserWebController {
 		} else {
 			username = principal.toString();
 		}
-		UserDto user = userService.findUserByEmail(username);
+		UserDto user = userService.findUserByEmail(username);   
 		List<UserDto> users = userService.findAllUsers();
 		users.remove(user);
 		model.addAttribute("user", user);
