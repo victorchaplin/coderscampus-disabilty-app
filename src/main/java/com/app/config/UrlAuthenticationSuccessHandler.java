@@ -56,7 +56,7 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 			}
 		}
 
-		throw new IllegalStateException();
+		throw new IllegalStateException();      
 	}
 
 	protected void clearAuthenticationAttributes(HttpServletRequest request) {

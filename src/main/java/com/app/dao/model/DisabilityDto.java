@@ -9,7 +9,7 @@ public class DisabilityDto {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public long getId() {   
 		return id;
 	}
 
