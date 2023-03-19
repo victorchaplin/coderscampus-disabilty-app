@@ -26,7 +26,7 @@ public class SpringSecurity {
 	}
 
 	@Bean
-	public AuthenticationSuccessHandler urlAuthenticationSuccessHandler() {
+	public AuthenticationSuccessHandler urlAuthenticationSuccessHandler() {    
 		return new UrlAuthenticationSuccessHandler();
 	}
 
