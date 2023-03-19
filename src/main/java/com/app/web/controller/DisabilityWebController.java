@@ -28,7 +28,7 @@ public class DisabilityWebController {
 	private UserService userService;
 
 	@GetMapping("/admindisabilities")
-	public String getDisabilities(Model model) {
+	public String getDisabilities(Model model) { // comes from HTML page
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = null;
 		if (principal instanceof UserDetails) {

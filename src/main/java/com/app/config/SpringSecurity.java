@@ -34,13 +34,14 @@ public class SpringSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeHttpRequests((authorize) -> {
 			authorize.requestMatchers("/register**", "/login**", "/", "/static/**", "/register/**").permitAll()
+					.requestMatchers("/profile/save/**").hasAnyRole("admin", "user")
 					.requestMatchers("/patientshome/**", "/patientdisabilities/**", "/patient/disability/**",
 							"/patient/update/**")
-					.hasRole("patient").requestMatchers("/userhome/**","/profile/save/**").hasRole("user")
+					.hasRole("patient").requestMatchers("/userhome/**").hasRole("user")
 					.requestMatchers("/adminhome/**", "/adminprofile/**", "/adminpatients/**", "/adminusers/**",
 							"/admindisabilities/**", "/patient/**", "/disability/**", "/disabilityedit/**",
-							"/patientview/**","/user/**","/profile/save/**")
-					.hasRole("admin").requestMatchers("/profile/**").hasAnyRole("admin", "patient");
+							"/patientview/**", "/user/**")
+					.hasRole("admin");
 		}).formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login")
 				.successHandler(urlAuthenticationSuccessHandler()))
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
@@ -52,4 +53,3 @@ public class SpringSecurity {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 }
-   
