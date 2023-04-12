@@ -6,13 +6,13 @@ The technologies used in the Disability-Project are:
 
 The SpringFrame Work tool suite is used as the IDE.
 
-  Java version 17 is used 
+  Java version 17 
   
   Spring Tool Suite
   
-  Mysql Database is used
+  Mysql Database
   
-  MySql Workbench is used
+  MySql Workbench
   
   Maven
 
